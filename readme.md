@@ -174,3 +174,9 @@ public class WebConfig implements WebMvcConfigurer {
 http://ip:port/context-path/swagger-ui/
 
 http://ip:port/context-path/swagger-ui/index.html
+
+# 六、统一返回值问题
+
+若项目中使用了统一返回值的包装类例如`BaseResponse`，方法返回时加上泛型，
+
+例如返回 `BaseResponse<User>`
