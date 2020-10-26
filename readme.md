@@ -141,6 +141,14 @@ public class SwaggerConfig {
 - example 属性的示例值
 - required 是否为必须值
 
+## 3.5、header参数
+
+```java
+@ApiImplicitParams({      @ApiImplicitParam(paramType="header",name="USERTOKEN",dataType="String",required=true,value="用户token")
+    })
+```
+
+# 
 # 四、拦截器放行
 
 若项目中有使用拦截器，放行以下路径
