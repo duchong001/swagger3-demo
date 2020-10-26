@@ -140,3 +140,37 @@ public class SwaggerConfig {
 - value 属性简短描述
 - example 属性的示例值
 - required 是否为必须值
+
+# 四、拦截器放行
+
+若项目中有使用拦截器，放行以下路径
+
+```java
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+    @Autowired
+    TokenInterceptor tokenInterceptor;
+
+    /**
+     * 拦截器
+     * @param registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        // 注册token拦截器
+        registry.addInterceptor(tokenInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/**/swagger-ui/**")
+                .excludePathPatterns("/**/swagger-resources/**")
+                .excludePathPatterns("/**/v3/**")
+        ;
+    }
+}
+```
+
+# 五、文档访问地址
+
+http://ip:port/context-path/swagger-ui/
+
+http://ip:port/context-path/swagger-ui/index.html
