@@ -2,3 +2,7 @@ server:
   port: 81
   servlet:
     context-path: /
+
+spring:
+  profiles:
+    active: dev
