@@ -147,6 +147,21 @@ public class SwaggerConfig {
 @ApiImplicitParams({      @ApiImplicitParam(paramType="header",name="USERTOKEN",dataType="String",required=true,value="用户token")
     })
 ```
+## 3.6、file入参
+
+需要使用`@RequestPart` 注解
+
+```java
+@ApiOperation(value = "上传文件接口",notes = "上传文件接口")
+@ApiImplicitParams({
+        @ApiImplicitParam(name = "name", value = "上传人")
+})
+@PostMapping(value = "/uploadFile")
+public String uploadFile(@RequestParam("name") String name,@RequestPart("file") MultipartFile file){
+    
+}
+```
+
 
 # 
 # 四、拦截器放行
