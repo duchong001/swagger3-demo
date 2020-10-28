@@ -5,11 +5,11 @@ import com.yj.swagger3.demo.web.model.UserVO;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * 用户控制器
@@ -101,6 +101,31 @@ public class UserController {
                     .ifPresent(u1->list.removeIf(Objects::isNull))
         ;
 
+        return "success";
+    }
+
+
+    @ApiOperation(value = "上传文件接口",notes = "上传文件接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "上传人")
+    })
+    @PostMapping(value = "/uploadFile")
+    public String uploadFile(@RequestParam("name") String name,@RequestPart("file") MultipartFile file){
+        String path = System.getProperty("user.dir");
+        String originalFilename = file.getOriginalFilename();
+        String filePath=path + File.separator + originalFilename ;
+        Optional.ofNullable(file)
+                .filter(Objects::nonNull)
+                .filter(f->!f.isEmpty())
+                .ifPresent(file1 -> {
+                    try {
+                        file1.transferTo(new File(filePath));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+
+        log.info("name---{}",name);
         return "success";
     }
 }
