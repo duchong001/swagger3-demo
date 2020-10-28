@@ -72,7 +72,7 @@ public class UserController {
      * @return
      */
     @ApiOperation(value = "获取用户信息接口2",notes = "获取用户信息接口2-实体对象入参",tags ={"获取用户信息接口2 tags"},response = User.class)
-    @GetMapping("/getUser2")
+    @PostMapping("/getUser2")
     public User getUser2(@RequestBody UserVO userVO){
 
         return  list.stream().filter(u->u.getId().equals(userVO.getId())
